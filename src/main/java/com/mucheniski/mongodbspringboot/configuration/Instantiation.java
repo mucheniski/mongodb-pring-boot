@@ -1,4 +1,4 @@
-package com.mucheniski.mongodbspringboot.config;
+package com.mucheniski.mongodbspringboot.configuration;
 
 import java.util.Arrays;
 
