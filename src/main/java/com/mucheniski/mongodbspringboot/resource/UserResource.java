@@ -25,7 +25,7 @@ import com.mucheniski.mongodbspringboot.service.UserService;
 @RestController
 @RequestMapping(value="/users")
 public class UserResource {
-	
+	 
 	@Autowired
 	private UserService userService;
 
