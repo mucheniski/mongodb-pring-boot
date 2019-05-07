@@ -3,6 +3,7 @@ package com.mucheniski.mongodbspringboot.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,7 @@ public class UserService {
 	
 	public User findById(String id) {
 		Optional<User> user = userRepository.findById(id);
-		return user.orElseThrow(() -> new ObjectNotFoundException("Usuário não encontrado!"));
+		return user.orElseThrow(() -> new ObjectNotFoundException("Usuário não encontrado com o ID: " + id));
 	}
 	
 	public User insert(User user) {
@@ -33,6 +34,12 @@ public class UserService {
 	public void deleteById(String id) {
 		findById(id);
 		userRepository.deleteById(id);
+	}
+	
+	public User update(String id, User updatedUser) {
+		User actualUser = findById(id);
+		BeanUtils.copyProperties(updatedUser, actualUser, "id");
+		return userRepository.save(actualUser);
 	}
 	
 	public User fromDTO(UserDTO userDTO) {
