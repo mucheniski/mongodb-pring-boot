@@ -19,10 +19,14 @@ public class PostService {
 	public List<Post> findAll() { 
 		return postRepository.findAll();
 	}	
-	
+		
 	public Post findById(String id) {
 		Optional<Post> user = postRepository.findById(id);
 		return user.orElseThrow(() -> new ObjectNotFoundException("Post não encontrado com o ID: " + id));
+	}
+	
+	public List<Post> findByTitle(String text) {
+		return postRepository.findByTitleContainingIgnoreCase(text);
 	}
 	
 }
