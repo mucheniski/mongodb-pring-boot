@@ -40,4 +40,11 @@ public class PostResource {
 		return ResponseEntity.ok().body(list);
 	}
 	
+	@GetMapping(value="/findbytitleQuery")
+	public ResponseEntity <List<Post>> findByTitleWhitQuery(@RequestParam(value="text", defaultValue="") String text) {			
+		text = URL.decoreParam(text);		
+		List<Post> list = postService.findByTitle(text);		
+		return ResponseEntity.ok().body(list);
+	}
+	
 }
